@@ -15,14 +15,25 @@ if (!fs.existsSync(uploadsDir)) {
 const app = express();
 
 // 1. CORS first
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://city-complaints-management-system.vercel.app"
+];
+
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "https://city-complaints-management-system.vercel.app"
-  ],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+
+    if (
+      allowedOrigins.includes(origin) ||
+      origin.includes(".vercel.app")
+    ) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true
 }));
 // 2. Body parsers
 app.use(express.json());

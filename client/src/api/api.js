@@ -1,6 +1,4 @@
-const API =
-  process.env.REACT_APP_API_URL ||
-  "https://city-complaints-backend.onrender.com/api";
+const API = "https://city-complaints-backend.onrender.com/api";
 
 export const apiFetch = async (path, method = "GET", body = null, token = null) => {
   try {

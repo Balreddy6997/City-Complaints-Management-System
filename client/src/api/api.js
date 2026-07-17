@@ -1,4 +1,6 @@
-const API = "http://localhost:5000/api";
+const API =
+  process.env.REACT_APP_API_URL ||
+  "https://city-complaints-backend.onrender.com/api";
 
 export const apiFetch = async (path, method = "GET", body = null, token = null) => {
   try {
@@ -10,7 +12,7 @@ export const apiFetch = async (path, method = "GET", body = null, token = null) 
       },
       ...(body ? { body: JSON.stringify(body) } : {}),
     });
-    
+
     const data = await res.json();
     console.log(`[API] ${method} ${path} - Status: ${res.status}`, data);
     return data;
@@ -22,12 +24,12 @@ export const apiFetch = async (path, method = "GET", body = null, token = null) 
 
 export const apiUpload = async (path, formData, token) => {
   const res = await fetch(`${API}${path}`, {
-    method: 'POST',
+    method: "POST",
     headers: {
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      // Do NOT set Content-Type — browser sets it automatically with boundary for FormData
     },
     body: formData,
   });
+
   return res.json();
 };

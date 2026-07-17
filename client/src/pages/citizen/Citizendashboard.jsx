@@ -7,8 +7,8 @@ import AP_DISTRICTS from "../../data/districts";
 const CitizenDashboard = ({ setPage }) => {
   const { token, user } = useAuth();
   const [complaints,    setComplaints]    = useState([]);
-  const [districtStats, setDistrictStats] = useState([]);
   const [districtFilter,setDistrictFilter]= useState("All");
+  
 
   useEffect(() => {
     apiFetch("/complaints", "GET", null, token)

@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { apiFetch } from "../api/api";
 
@@ -10,19 +10,7 @@ const AuthPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Test connectivity
-  const testConnection = async () => {
-    try {
-      console.log("Testing connection to backend...");
-      const res = await fetch("http://localhost:5000/api/health");
-      const data = await res.json();
-      console.log("✅ Backend connection successful:", data);
-      alert("✅ Backend is reachable!");
-    } catch (err) {
-      console.error("❌ Backend connection failed:", err);
-      alert("❌ Cannot reach backend. Check console for details.");
-    }
-  };
+ 
 
   const handle = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 

@@ -16,12 +16,14 @@ const app = express();
 
 // 1. CORS first
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: [
+    "http://localhost:3000",
+    "https://city-complaints-management-system.vercel.app"
+  ],
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 }));
-
 // 2. Body parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
